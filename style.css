@@ -55,9 +55,8 @@ body {
   height: 450px;
   transition: all 0.4s ease;
   background: linear-gradient(135deg, #fff, #f4f4f4);
-  overflow-x: scroll;
-  overflow-y: hidden;
-  display: flex;
+  overflow-x: auto;
+  display: block;
 }
 
 .md-iframe::-webkit-scrollbar {
@@ -81,6 +80,17 @@ body {
   padding: 1rem;
   margin: 0;
   list-style: none;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.product-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.product-list::-webkit-scrollbar-thumb {
+  background: #6200ea;
+  border-radius: 10px;
 }
 
 .product-item {
