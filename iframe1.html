@@ -3,30 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prodotti Tabella</title>
+  <title>Prodotti</title>
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <ul class="product-list">
-    <li class="product-item">
-      <img src="https://picsum.photos/150" alt="Prodotto 1">
-      <h3>Prodotto 1</h3>
-      <p>Descrizione breve del prodotto 1.</p>
-      <a href="#">Acquistalo!</a>
-    </li>
-    <li class="product-item">
-      <img src="https://picsum.photos/150" alt="Prodotto 2">
-      <h3>Prodotto 2</h3>
-      <p>Descrizione breve del prodotto 2.</p>
-      <a href="#">Acquistalo!</a>
-    </li>
-    <li class="product-item">
-      <img src="https://picsum.photos/150" alt="Prodotto 3">
-      <h3>Prodotto 3</h3>
-      <p>Descrizione breve del prodotto 3.</p>
-      <a href="#">Acquistalo!</a>
-    </li>
-    <!-- Aggiungi altri prodotti -->
+  <ul class="product-list" id="product-list">
+    <!-- I prodotti saranno caricati dinamicamente -->
   </ul>
+
+  <script>
+    async function loadProducts() {
+      try {
+        // Esegui la richiesta per ottenere il JSON
+        const response = await fetch('data/products.json');
+        if (!response.ok) throw new Error('Errore nel caricamento dei dati.');
+
+        const products = await response.json();
+
+        // Seleziona la lista dei prodotti
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = ''; // Pulisci il contenuto esistente
+
+        // Aggiungi i prodotti
+        products.forEach(product => {
+          const productItem = document.createElement('li');
+          productItem.className = 'product-item';
+
+          productItem.innerHTML = `
+            <img src="${product.image}" alt="${product.title}">
+            <h3>${product.title}</h3>
+            <p>${product.description}</p>
+            <a href="${product.link}" target="_blank">Acquista</a>
+          `;
+
+          productList.appendChild(productItem);
+        });
+      } catch (error) {
+        console.error('Errore durante il caricamento dei prodotti:', error);
+      }
+    }
+
+    // Chiama la funzione per caricare i prodotti al caricamento della pagina
+    loadProducts();
+  </script>
 </body>
 </html>
