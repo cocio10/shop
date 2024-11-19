@@ -173,7 +173,7 @@ body {
 
 /* Header di ricerca fisso */
 .search-header {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
