@@ -7,44 +7,72 @@
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Header fisso con casella di ricerca -->
+  <header class="search-header">
+    <input 
+      type="text" 
+      id="search-box" 
+      placeholder="Cerca prodotti..." 
+      oninput="filterProducts()"
+    >
+  </header>
+
+  <!-- Lista prodotti -->
   <ul class="product-list" id="product-list">
     <!-- I prodotti saranno caricati dinamicamente -->
   </ul>
 
   <script>
+    let products = []; // Variabile globale per i prodotti
+
+    // Funzione per caricare i prodotti dal JSON
     async function loadProducts() {
       try {
-        // Esegui la richiesta per ottenere il JSON
         const response = await fetch('data/products.json');
         if (!response.ok) throw new Error('Errore nel caricamento dei dati.');
 
-        const products = await response.json();
-
-        // Seleziona la lista dei prodotti
-        const productList = document.getElementById('product-list');
-        productList.innerHTML = ''; // Pulisci il contenuto esistente
-
-        // Aggiungi i prodotti
-        products.forEach(product => {
-          const productItem = document.createElement('li');
-          productItem.className = 'product-item';
-
-          productItem.innerHTML = `
-            <img src="${product.image}" alt="${product.title}">
-            <h3>${product.title}</h3>
-            <p>${product.description}</p>
-            <a href="${product.link}" target="_blank">Acquista</a>
-          `;
-
-          productList.appendChild(productItem);
-        });
+        products = await response.json(); // Salva i prodotti nella variabile globale
+        displayProducts(products); // Mostra i prodotti iniziali
       } catch (error) {
         console.error('Errore durante il caricamento dei prodotti:', error);
       }
     }
 
-    // Chiama la funzione per caricare i prodotti al caricamento della pagina
+    // Funzione per mostrare i prodotti nella lista
+    function displayProducts(filteredProducts) {
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = ''; // Pulisci la lista esistente
+
+      filteredProducts.forEach(product => {
+        const productItem = document.createElement('li');
+        productItem.className = 'product-item';
+
+        productItem.innerHTML = `
+          <img src="${product.image}" alt="${product.title}">
+          <h3>${product.title}</h3>
+          <p>${product.description}</p>
+          <a href="${product.link}" target="_blank">Acquista</a>
+        `;
+
+        productList.appendChild(productItem);
+      });
+    }
+
+    // Funzione per filtrare i prodotti in base alla ricerca
+    function filterProducts() {
+      const query = document.getElementById('search-box').value.toLowerCase();
+
+      const filteredProducts = products.filter(product => 
+        product.title.toLowerCase().includes(query) ||
+        product.description.toLowerCase().includes(query)
+      );
+
+      displayProducts(filteredProducts); // Mostra i prodotti filtrati
+    }
+
+    // Carica i prodotti al caricamento della pagina
     loadProducts();
   </script>
 </body>
 </html>
+
