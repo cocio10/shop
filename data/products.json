@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Prodotto 1",
+    "image": "https://via.placeholder.com/150",
+    "description": "Descrizione prodotto 1",
+    "link": "https://example.com/1"
+  },
+  {
+    "title": "Prodotto 2",
+    "image": "https://via.placeholder.com/150",
+    "description": "Descrizione prodotto 2",
+    "link": "https://example.com/2"
+  },
+  {
+    "title": "Prodotto 3",
+    "image": "https://via.placeholder.com/150",
+    "description": "Descrizione prodotto 3",
+    "link": "https://example.com/3"
+  }
+]
