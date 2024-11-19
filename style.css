@@ -150,7 +150,7 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
   .md-iframe {
-    height: 350px;
+    height: 360px;
   }
 
   .product-item {
