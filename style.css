@@ -214,3 +214,36 @@ body {
 .search-header input:hover {
   background: #f9f9f9;
 }
+
+/* Footer */
+.md-footer {
+  background-color: #6200ea;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.md-footer p {
+  margin: 0.5rem 0;
+}
+
+.footer-nav {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer-nav a {
+  color: #ffb74d;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+  color: #ffd54f;
+}
